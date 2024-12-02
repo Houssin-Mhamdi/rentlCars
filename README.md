@@ -83,3 +83,31 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+Test Endpoints
+
+Get all cars with pagination:
+/cars?page=1&limit=5
+
+Search by keyword:
+/cars?search=Toyota
+
+Filter by color and year:
+/cars?color=red&year=2020
+
+Sort by price in descending order:
+/cars?sortField=price&sortOrder=DESC
+
+/******\*\*******\*\*\*\*******\*\*******/
+Booking
+Explanation of Fields
+
+-carId-: The ID of the car being booked. Ensure this car ID exists in your Car database table.
+
+-customerName-: The name of the customer booking the car.
+-customerEmail-: The customer's email address.
+-customerPhone-: The customer's phone number in international format.
+-startDate-: The date when the booking starts (in YYYY-MM-DD format).
+-startTime-: The time when the booking starts (in HH:MM:SS format, 24-hour clock).
+-endDate-: The date when the booking ends (in YYYY-MM-DD format).
+-endTime-: The time when the booking ends (in HH:MM:SS format, 24-hour clock).
