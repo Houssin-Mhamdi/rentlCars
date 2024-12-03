@@ -9,9 +9,9 @@ services:
       - 5432:5432
 
     environment:
-      - POSTGRES_DB=testDB
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=car_rent_jizy
+      - POSTGRES_USER=car_rent_jizy_user
+      - POSTGRES_PASSWORD=ewW8CXozwK7g38jkY05V4NcWQgA0ha3d
 
   adminer:
     image: adminer
