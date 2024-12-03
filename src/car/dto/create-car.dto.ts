@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsBoolean } from 'class-validator';
 
 export class CreateCarDto {
   @IsNotEmpty()
@@ -54,5 +54,9 @@ export class CreateCarDto {
   make: string;
 
   @IsString()
-  transmission: string; // corrected spelling
+  transmission: string; 
+
+
+  @IsBoolean()
+  is_available: boolean;
 }
