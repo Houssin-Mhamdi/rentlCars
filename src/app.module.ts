@@ -6,7 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { CarModule } from './car/car.module';
 import { BookingModule } from './booking/booking.module';
-import config from '../ormconfig';
 import { ContactModule } from './contact/contact.module';
 @Module({
   imports: [
