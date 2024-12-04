@@ -13,8 +13,8 @@ export class Booking {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Car, (car) => car.id, { eager: true }) // Relation with the Car entity
-  carId: Car;
+  // @ManyToOne(() => Car, (car) => car.id, { eager: true }) // Relation with the Car entity
+  // carId: Car;
   @ManyToOne(() => Car, (car) => car.booking)
   car: Car;
 

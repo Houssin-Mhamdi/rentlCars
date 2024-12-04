@@ -24,7 +24,7 @@ export class BookingService {
     }
 
     const booking = this.bookingRepo.create({
-      carId: car,
+      car: car,
       customerName: createBookingDto.customerName,
       customerEmail: createBookingDto.customerEmail,
       customerPhone: createBookingDto.customerPhone,

@@ -144,17 +144,18 @@ export class CarService {
     if (
       booking.status === 'completed' ||
       booking.status === 'canceled' ||
-      booking.status === 'confirmed'
+      (status === 'confirmed' && booking.status === 'confirmed')
     ) {
       throw new BadRequestException(
-        `Booking with ID ${bookingId} is already ${booking.status} and cannot be updated further.`,
+        `Booking with ID ${bookingId} is already ${booking.status} and cannot be updated further.`
       );
     }
 
     if (status === 'confirmed') {
-      await this.decreseCarQuantity(booking.carId.id);
-    } else if (status === 'completed' || status === 'canceled') {
-      await this.increaseCarQuantity(booking.carId.id);
+      await this.decreseCarQuantity(booking.car.id);
+    } else if (status === 'canceled') {
+      await this.increaseCarQuantity(booking.car.id);
+     
     }
 
     booking.status = status;
