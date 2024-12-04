@@ -136,7 +136,7 @@ export class CarService {
       where: { id: bookingId },
     });
 
-    if (!booking) throw new NotFoundException(' Booking not found');
+    if (!booking) throw new NotFoundException(`Booking with ID ${bookingId} not found`);
 
     if (status === 'confirmed') {
       await this.decreseCarQuantity(booking.car.id);

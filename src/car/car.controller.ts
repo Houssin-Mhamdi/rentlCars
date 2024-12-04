@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { CarService } from './car.service';
 import { CreateCarDto } from './dto/create-car.dto';
@@ -46,6 +48,10 @@ export class CarController {
     @Param('bookingId') bookingId: number,
     @Body('status') status: string,
   ) {
-    return this.carService.updateReservationStatus(bookingId, status);
+    try {
+      return await this.carService.updateReservationStatus(+bookingId, status);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 }
