@@ -65,7 +65,7 @@ export class BookingService {
   }
 
   findOne(id: number) {
-    return this.bookingRepo.findOne({ where: { id: id } });
+    return this.bookingRepo.findOne({ where: { id: id } ,relations:["car"]});
   }
 
   update(id: number, updateBookingDto: UpdateBookingDto) {
