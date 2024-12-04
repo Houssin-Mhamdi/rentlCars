@@ -41,4 +41,11 @@ export class CarController {
   remove(@Param('id') id: string) {
     return this.carService.remove(+id);
   }
+  @Patch('booking/:id/status')
+  async updateBookingState(
+    @Param('id') bookingId: number,
+    @Body('status') status: string,
+  ) {
+    return this.carService.updateReservationStatus(bookingId, status);
+  }
 }

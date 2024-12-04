@@ -1,16 +1,24 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Car } from './entities/car.entity';
 import { Repository } from 'typeorm';
 import { CarQueryParamsDto } from './dto/car-query-params.dto';
+import { Booking } from 'src/booking/entities/booking.entity';
 
 @Injectable()
 export class CarService {
   constructor(
     @InjectRepository(Car)
     private readonly CarRepo: Repository<Car>,
+
+    @InjectRepository(Booking)
+    private readonly BookingRepo: Repository<Booking>,
   ) {}
 
   create(createCarDto: CreateCarDto) {
@@ -100,5 +108,43 @@ export class CarService {
 
   remove(id: number) {
     return this.CarRepo.delete(id);
+  }
+
+  async decreseCarQuantity(carId: number) {
+    const car = await this.CarRepo.findOne({ where: { id: carId } });
+    if (!car) throw new NotFoundException('Car not found');
+
+    if (car.quantity <= 0) throw new BadRequestException('No cars availble');
+
+    car.quantity -= 1;
+
+    if (car.quantity === 0) car.is_available = false;
+    return this.CarRepo.save(car);
+  }
+
+  async increaseCarQuantity(carId: number) {
+    const car = await this.CarRepo.findOne({ where: { id: carId } });
+
+    if (!car) throw new NotFoundException('Car not found');
+
+    car.quantity += 1;
+    car.is_available = true;
+  }
+
+  async updateReservationStatus(bookingId: number, status: string) {
+    const booking = await this.BookingRepo.findOne({
+      where: { id: bookingId },
+    });
+
+    if (!booking) throw new NotFoundException(' Booking not found');
+
+    if (status === 'confirmed') {
+      await this.decreseCarQuantity(booking.car.id);
+    } else {
+      await this.increaseCarQuantity(booking.car.id);
+    }
+
+    booking.status = status;
+    return this.BookingRepo.save(booking);
   }
 }

@@ -54,9 +54,11 @@ export class CreateCarDto {
   make: string;
 
   @IsString()
-  transmission: string; 
-
+  transmission: string;
 
   @IsBoolean()
   is_available: boolean;
+
+  @IsNumber()
+  quantity: number;
 }
