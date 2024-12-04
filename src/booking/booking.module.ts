@@ -6,10 +6,7 @@ import { Booking } from './entities/booking.entity';
 import { Car } from 'src/car/entities/car.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Booking]),
-    TypeOrmModule.forFeature([Car]),
-  ],
+  imports: [TypeOrmModule.forFeature([Booking, Car])],
   controllers: [BookingController],
   providers: [BookingService],
 })

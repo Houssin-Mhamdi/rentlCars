@@ -141,6 +141,16 @@ export class CarService {
     if (!booking)
       throw new NotFoundException(`Booking with ID ${bookingId} not found`);
 
+    if (
+      booking.status === 'completed' ||
+      booking.status === 'canceled' ||
+      booking.status === 'confirmed'
+    ) {
+      throw new BadRequestException(
+        `Booking with ID ${bookingId} is already ${booking.status} and cannot be updated further.`,
+      );
+    }
+
     if (status === 'confirmed') {
       await this.decreseCarQuantity(booking.carId.id);
     } else if (status === 'completed' || status === 'canceled') {
