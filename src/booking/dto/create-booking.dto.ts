@@ -9,7 +9,7 @@ import {
 
 export class CreateBookingDto {
   @IsNotEmpty()
-  carId: number; // Refers to the car ID being booked
+  car: any; // Refers to the car ID being booked
 
   @IsNotEmpty()
   @IsString()

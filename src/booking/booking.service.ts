@@ -16,7 +16,7 @@ export class BookingService {
   ) {}
   async createBooking(createBookingDto: CreateBookingDto) {
     const car = await this.carRepo.findOne({
-      where: { id: createBookingDto.carId },
+      where: { id: createBookingDto.car},
     });
 
     if (!car) {
