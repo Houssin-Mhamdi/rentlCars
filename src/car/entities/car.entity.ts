@@ -53,6 +53,6 @@ export class Car {
   @Column({ default: 1 })
   quantity: number;
 
-  @OneToMany(() => Booking, (booking) => booking.car, { eager: true })
+  @OneToMany(() => Booking, (booking) => booking.car)
   booking: Booking[];
 }
