@@ -5,7 +5,7 @@ import { Car } from 'src/car/entities/car.entity';
 const config: PostgresConnectionOptions = {
   type: 'postgres',
   database: 'testDB',
-  host: 'localhost',
+  host: '127.0.0.1',
   port: 5432,
   username: 'postgres',
   password: 'postgres',
