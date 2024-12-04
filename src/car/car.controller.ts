@@ -43,7 +43,7 @@ export class CarController {
   }
   @Patch('booking/:bookingId/status')
   async updateBookingState(
-    @Param('id') bookingId: number,
+    @Param('bookingId') bookingId: number,
     @Body('status') status: string,
   ) {
     return this.carService.updateReservationStatus(bookingId, status);
