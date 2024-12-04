@@ -139,9 +139,9 @@ export class CarService {
     if (!booking) throw new NotFoundException(' Booking not found');
 
     if (status === 'confirmed') {
-      await this.decreseCarQuantity(booking.car.id);
-    } else {
-      await this.increaseCarQuantity(booking.car.id);
+      await this.decreseCarQuantity(booking.carId.id);
+    } else if (status === 'completed' || status === 'canceled') {
+      await this.increaseCarQuantity(booking.carId.id);
     }
 
     booking.status = status;
