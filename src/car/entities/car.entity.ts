@@ -45,5 +45,8 @@ export class Car {
   make: string;
 
   @Column()
-  transmission: string; // corrected spelling
+  transmission: string;
+
+  @Column({ default: true })
+  is_available: boolean;
 }
