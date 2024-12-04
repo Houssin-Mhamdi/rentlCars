@@ -129,14 +129,17 @@ export class CarService {
 
     car.quantity += 1;
     car.is_available = true;
+    return this.CarRepo.save(car);
   }
 
   async updateReservationStatus(bookingId: number, status: string) {
     const booking = await this.BookingRepo.findOne({
       where: { id: bookingId },
+      relations: ['car'],
     });
 
-    if (!booking) throw new NotFoundException(`Booking with ID ${bookingId} not found`);
+    if (!booking)
+      throw new NotFoundException(`Booking with ID ${bookingId} not found`);
 
     if (status === 'confirmed') {
       await this.decreseCarQuantity(booking.car.id);
